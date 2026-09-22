@@ -1,13 +1,9 @@
 -- =============================================
 -- Script de creación de la base de datos
 -- Gestión de Usuarios - Arquitectura Hexagonal
+-- Se ejecuta contra la base de datos ya conectada
+-- (no crea ni selecciona base de datos).
 -- =============================================
-
-CREATE DATABASE IF NOT EXISTS crud_usuarios
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-
-USE crud_usuarios;
 
 CREATE TABLE IF NOT EXISTS users (
     id          VARCHAR(36)  NOT NULL PRIMARY KEY,
@@ -21,12 +17,13 @@ CREATE TABLE IF NOT EXISTS users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Usuario administrador inicial (password: Admin1234!)
-INSERT INTO users (id, name, email, password, role, status)
+-- INSERT IGNORE evita fallo al reiniciar la aplicación.
+INSERT IGNORE INTO users (id, name, email, password, role, status)
 VALUES (
     '00000000-0000-0000-0000-000000000001',
     'Administrador',
     'admin@example.com',
-    '$2a$12$placeholderHashReplaceWithRealBCryptHash',
+    '$2a$12$XoVR6ZADptsbdVzKYVC4PO5kzzRpz3PwOHuI.zgfum/84GBhN7D16',
     'ADMIN',
     'ACTIVE'
 );
